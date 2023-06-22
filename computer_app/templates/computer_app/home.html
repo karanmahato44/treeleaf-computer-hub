@@ -1,0 +1,9 @@
+{% extends 'computer_app/base.html' %}
+{% block content %}
+    <div class="">Available Brands</div>
+    <div class="">
+        {% for brand in brands %}
+            <a class="text-white" href="{% url 'brand-detail' brand.id %}"><div class="rounded-full my-2 bg-green-500 w-40 hover:bg-green-600 transition duration-300 active:bg-green-400">{{ brand }}</div></a>
+        {% endfor %}
+    </div>
+{% endblock content %}
