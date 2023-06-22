@@ -9,11 +9,10 @@ django-crispy-forms==2.0
 Pillow==9.5.0
 sqlparse==0.4.4
 </pre>
-<code>
+
 <pre>
 pip install -r requirements.txt
 </pre>
-</code>
 
 ## Screenshots
 
