@@ -1,8 +1,8 @@
 from django.urls import path
-from . import views as computer_app_views
-from .views import ComputerBrandsListView, ComputerSpecsDetailView
+from .views import ComputersListView, ComputerCreateView, ComputerUpdateView
 
 urlpatterns = [
-    path('', ComputerBrandsListView.as_view(), name='home'),
-    path('brand/<int:pk>', ComputerSpecsDetailView.as_view(), name='brand-detail')
+    path('', ComputersListView.as_view(), name='home'),
+    path('add-computer/', ComputerCreateView.as_view(), name='add-computer'),
+    path('computer/<int:pk>/update', ComputerUpdateView.as_view(), name='update-computer'),
 ]

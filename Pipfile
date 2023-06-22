@@ -5,6 +5,7 @@ name = "pypi"
 
 [packages]
 pillow = "*"
+crispy-tailwind = "*"
 
 [dev-packages]
 

@@ -1,0 +1,22 @@
+{% extends 'computer_app/base.html' %}
+{% block content %}
+    <div>
+        <div class="text-xl">Add Computers</div>
+        <a href="{% url 'add-computer' %}"><button><svg class="w-10 rounded-full transform hover:scale-105 transition duration-300" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v6m3-3H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" /></svg></button></a>
+    </div>
+
+    <div class="text-xl mt-5"><span>Available Computers</span></div>
+    <div class="text-sm"><em>(Click To Update)</em></span></div>
+
+    <div class="flex flex-col justify-center items-center py-2">
+        {% for item in computer_list %}
+            <a href="{% url 'update-computer' item.id %}">
+                <div class="flex justify-between items-center px-2 rounded-full py-1 w-80 my-1 bg-green-500 hover:bg-green-600 transition duration-300 active:bg-green-400">
+                    <div><img class="w-10 rounded-full object-cover border-2 border-green-500" src="{{ item.computer.brand.logo.url }}" alt="brand logo"></div>
+                    <div>{{ item.computer.generation }}</div>
+                    {% comment %} <div>{{ item.computer_code }}</div> {% endcomment %}
+                </div>
+            </a>
+        {% endfor %}
+    </div>
+{% endblock content %}

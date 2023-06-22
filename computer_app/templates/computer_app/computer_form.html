@@ -1,0 +1,37 @@
+{% extends 'computer_app/boilerplate.html' %}
+{% load static %}
+{% load tailwind_filters %}
+{% block content %}
+  <div class="flex flex-col justify-center items-center">
+    <img class="w-20 filter grayscale brightness-150 hover:brightness-200 transition duration-150" src="{% static 'computer_app/logo/treeleaf-logo.svg' %}" alt="treeleaf.ai logo">
+    <div class="mt-5 font-bold text-4xl text-center"><span class="text-[#81C341]">Treeleaf </span><span class="block md:inline-block text-white">Computer Hub</span></div>
+  </div> 
+
+  <div class="mt-10 text-white flex items-center justify-center text-center">
+    <form method="POST">
+      {% csrf_token %}
+      <div class="my-4 text-2xl font-bold border-b pb-2">
+        {% if request.path == '/add-computer/' %}
+          Add Computer
+        {% else %}
+          Update Computer
+        {% endif %}
+      </div>
+
+      <div class="text-white">
+        {{ form|crispy }}
+      </div>
+      
+      <div class="">
+        <button class="rounded-full bg-green-500 py-2 w-40 hover:bg-green-600 transition duration-300 active:bg-green-400" type="submit">
+          {% if request.path == '/add-computer/' %}
+            <span>Add</span>
+          {% else %}
+          <span>Update</span>
+          {% endif %}
+        </button>
+    </div>
+      <div class="text-sm mt-2"><em>Total Price Auto Calculated - See Admin Panel</em></div>
+    </form>
+  </div>
+{% endblock content %}
