@@ -2,6 +2,8 @@ from django.db import models
 from django.urls import reverse
 
 
+from django.core.validators import MinValueValidator, MaxValueValidator
+
 
 class ComputerBrands(models.Model):
     brand_name = models.CharField(max_length=100)
@@ -13,10 +15,11 @@ class ComputerBrands(models.Model):
 
 class ComputerSpecification(models.Model):
     generation = models.CharField(max_length=100)
-    price_min = models.DecimalField(max_digits=10, decimal_places=2)
-    price_max = models.DecimalField(max_digits=10, decimal_places=2)
-    ram = models.IntegerField()
+    price_min = models.DecimalField(max_digits=10, decimal_places=2, validators=[MinValueValidator(20000.00)])
+    price_max = models.DecimalField(max_digits=10, decimal_places=2,  validators=[MaxValueValidator(100000.00)])
+    ram = models.IntegerField(validators=[MinValueValidator(1)])
     brand = models.ForeignKey(ComputerBrands, on_delete=models.CASCADE)
+    
 
     def __str__(self):
         return f'{self.brand.brand_name} - {self.generation}'
@@ -24,9 +27,9 @@ class ComputerSpecification(models.Model):
 
 class Computer(models.Model):
     computer_code = models.CharField(max_length=100, unique=True)
-    quantity = models.IntegerField()
-    unit_rate = models.IntegerField()
-    total_price = models.IntegerField()
+    quantity = models.IntegerField(validators=[MinValueValidator(1)])
+    unit_rate = models.IntegerField(validators=[MinValueValidator(0)])
+    total_price = models.IntegerField(validators=[MinValueValidator(0)])
     computer = models.ForeignKey(ComputerSpecification, on_delete=models.CASCADE)
 
     def save(self, *args, **kwargs):
